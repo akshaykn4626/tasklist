@@ -1,0 +1,22 @@
+ completeTask(response) {
+        const jsondata= {
+            jobKey: response.jobKey
+        };
+        console.log("json data", jsondata);
+        
+        this.http.post('http://localhost:9191/Complete',jsondata).subscribe(item => {
+            //console.log("item ",item);
+            this.tasklistRepo.query('DELETE FROM  task_entity	WHERE task_entity."jobKey"='+response.jobKey);
+        });
+    }
+    
+    
+    findAll(userRole): Promise<taskEntity[]> {
+        let query='select * from task_entity where task_entity."assignee" =\'' + userRole +'\'';
+        console.log(query);        
+        return this.tasklistRepo.query(query);
+    }
+    
+    findAllTasks(): Promise<taskEntity[]> {
+        return this.tasklistRepo.find();
+    }
