@@ -20,3 +20,40 @@
     findAllTasks(): Promise<taskEntity[]> {
         return this.tasklistRepo.find();
     }
+    
+    
+    1) To start  zookeeper server
+
+.\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
+
+2)To start kafka server 
+
+.\bin\windows\kafka-server-start.bat .\config\server.properties
+
+
+3)To create a topic 
+
+.\bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic TestTopic
+
+ 
+4)To list topic 
+
+.\bin\windows\kafka-topics.bat --list --zookeeper localhost:2181
+
+5)add messages into the  topic
+
+.\bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic TestTopic
+
+6) create a consumer which will consume all  the topics from the testtopic (sonsuming the message)
+
+.\bin\windows\kafka-console-consumer.bat --bootstrap-server 1ocalhost:9092 --topic TestTopic --from-beginning
+
+
+
+
+
+
+
+
+
+
